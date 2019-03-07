@@ -9,5 +9,4 @@ COPY ./docker/nginx/conf.d/*.conf /etc/nginx/conf.d/
 
 #RUN chown -R www-data:www-data /srv/app
 
-
-#CMD ["nginx", "-g", "daemon off;"]
+CMD ["/bin/bash", "-c", "envsubst '${NGINX_HOST} ${NGINX_PORT}' < /etc/nginx/conf.d/app.conf > /etc/nginx/conf.d/app.conf && exec nginx -g 'daemon off;'"]
